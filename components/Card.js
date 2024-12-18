@@ -2,7 +2,6 @@ import Image from "next/image";
 
 export default function Card({ cardInfo }) {
     return (
-        // <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 bg-gray-100">
         <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
             <div className="h-40 bg-gray-200 flex items-center justify-center">
                 <div className="w-full h-40 relative">
@@ -24,6 +23,5 @@ export default function Card({ cardInfo }) {
                 </button>
             </div>
         </div>
-        // </div>
     )
 }
