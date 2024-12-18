@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
+import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const { isSignedIn } = useUser();
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -78,12 +80,23 @@ export default function Navbar() {
                             </a>
                         </li>
                         <li>
-                            <a
-                                href="/profile"
-                                className="underline hover:text-gray-400 block px-4 py-2"
-                            >
-                                Profile
-                            </a>
+                            {isSignedIn ? (
+                                <SignOutButton>
+                                    <a
+                                        className="underline hover:text-gray-400 block px-4 py-2 cursor-pointer text-red-500"
+                                    >
+                                        Sign Out
+                                    </a>
+                                </SignOutButton>
+                            ) : (
+                                <SignInButton>
+                                    <a
+                                        className="underline hover:text-gray-400 block px-4 py-2 cursor-pointer text-green-500"
+                                    >
+                                        Sign In
+                                    </a>
+                                </SignInButton>
+                            )}
                         </li>
                     </ul>
                 </div>
