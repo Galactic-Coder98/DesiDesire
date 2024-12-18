@@ -9,8 +9,8 @@ export default function Navbar() {
     };
 
     return (
-        <nav className="bg-white shadow-md sticky top-0 z-50 rounded-lg max-w-screen-lg mx-auto mt-2">
-            <div className="container mx-auto px-4 flex justify-between items-center h-16">
+        <nav className="bg-white shadow-md sticky top-0 z-50 rounded-lg w-full px-4 mx-auto mt-2 max-w-screen-xl">
+            <div className="flex justify-between items-center h-16 w-full">
                 {/* Logo Section */}
                 <div className="text-black text-xl font-semibold font-sans">DesiDesire</div>
 
