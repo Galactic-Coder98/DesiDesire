@@ -58,7 +58,7 @@ export default function Home() {
     <div className = "flex flex-col min-h-screen" >
       <Navbar />
       <main className="flex-grow max-w-screen-xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 p-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 p-6">
           {mockData.map((info) => (
             <Card cardInfo={info} key={info.id}/>
           ))}
