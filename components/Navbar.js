@@ -4,7 +4,7 @@ import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
-    const { isSignedIn, user } = useUser(); // Access user details
+    const { isSignedIn, user } = useUser();
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -14,8 +14,17 @@ export default function Navbar() {
         <nav className="bg-white shadow-md sticky top-0 z-50 rounded-lg w-full px-4 mx-auto mt-2 max-w-screen-xl">
             <div className="flex justify-between items-center h-16">
                 {/* Logo Section */}
-                <div className="text-black text-xl font-semibold font-sans">
-                    DesiDesire
+                <div className="flex items-center space-x-2">
+                    <div className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-200 p-2">
+                        <img
+                            src="/sari-svg.svg" // Path to your SVG in the public folder
+                            alt="DesiDesire Logo"
+                            className="w-full h-full"
+                        />
+                    </div>
+                    <span className="italic text-black text-xl font-semibold font-sans">
+                        DesiDesire
+                    </span>
                 </div>
 
                 {/* Hamburger Menu Button */}
@@ -79,7 +88,6 @@ export default function Navbar() {
                         </li>
                         {isSignedIn ? (
                             <li className="flex items-center space-x-4">
-                                {/* User Profile Image from Clerk */}
                                 <a href="/account" className="relative">
                                     {user?.profileImageUrl ? (
                                         <img
@@ -100,7 +108,6 @@ export default function Navbar() {
                                         </div>
                                     )}
                                 </a>
-                                {/* Sign Out Button */}
                                 <SignOutButton>
                                     <a className="underline text-red-500 hover:text-red-700 block px-4 py-2 cursor-pointer">
                                         Sign Out
@@ -147,7 +154,6 @@ export default function Navbar() {
                     </li>
                     {isSignedIn ? (
                         <li className="flex flex-col items-center space-y-2 text-center">
-                            {/* User Profile Image from Clerk */}
                             <a href="/account" className="relative">
                                 {user?.profileImageUrl ? (
                                     <img
@@ -168,7 +174,6 @@ export default function Navbar() {
                                     </div>
                                 )}
                             </a>
-                            {/* Sign Out Button */}
                             <SignOutButton>
                                 <a className="underline text-red-500 hover:text-red-700 block px-4 py-2 cursor-pointer">
                                     Sign Out
