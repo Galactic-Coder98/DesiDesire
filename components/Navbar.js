@@ -4,7 +4,7 @@ import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
-    const { isSignedIn } = useUser();
+    const { isSignedIn, user } = useUser(); // Access user details
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -12,9 +12,11 @@ export default function Navbar() {
 
     return (
         <nav className="bg-white shadow-md sticky top-0 z-50 rounded-lg w-full px-4 mx-auto mt-2 max-w-screen-xl">
-            <div className="flex justify-between items-center h-16 w-full">
+            <div className="flex justify-between items-center h-16">
                 {/* Logo Section */}
-                <div className="text-black text-xl font-semibold font-sans">DesiDesire</div>
+                <div className="text-black text-xl font-semibold font-sans">
+                    DesiDesire
+                </div>
 
                 {/* Hamburger Menu Button */}
                 <div className="md:hidden">
@@ -60,9 +62,9 @@ export default function Navbar() {
                 <div
                     className={`${
                         isOpen ? "block" : "hidden"
-                    } absolute top-20 left-0 w-full md:static md:w-auto md:flex md:items-center bg-gray-100 md:bg-transparent rounded-lg shadow-md md:shadow-none`}
+                    } md:flex items-center space-y-4 md:space-y-0 md:space-x-6`}
                 >
-                    <ul className="flex flex-col md:flex-row md:space-x-6 text-black space-y-4 md:space-y-0 p-6 md:p-0 rounded-lg">
+                    <ul className="flex flex-col md:flex-row md:space-x-6 items-center text-black space-y-4 md:space-y-0 p-6 md:p-0">
                         <li>
                             <a
                                 href="/"
@@ -79,16 +81,38 @@ export default function Navbar() {
                                 About
                             </a>
                         </li>
-                        <li>
-                            {isSignedIn ? (
+                        {isSignedIn ? (
+                            <li className="flex items-center space-x-4">
+                                {/* User Profile Image from Clerk */}
+                                <a href="/account" className="relative">
+                                    {user?.profileImageUrl ? (
+                                        <img
+                                            src={user.profileImageUrl}
+                                            alt="User Avatar"
+                                            className="w-8 h-8 rounded-full border border-gray-300 shadow-sm"
+                                        />
+                                    ) : (
+                                        <div
+                                            className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-300 text-black font-bold text-sm border border-gray-300 shadow-sm"
+                                            title={user?.fullName || "User"}
+                                        >
+                                            {user?.fullName
+                                                ?.split(" ")
+                                                .map((part) => part.charAt(0).toUpperCase())
+                                                .join("")
+                                                .slice(0, 2)}
+                                        </div>
+                                    )}
+                                </a>
+                                {/* Sign Out Button */}
                                 <SignOutButton>
-                                    <a
-                                        className="underline hover:text-gray-400 block px-4 py-2 cursor-pointer text-red-500"
-                                    >
+                                    <a className="text-red-500 hover:text-red-700 block px-4 py-2 cursor-pointer">
                                         Sign Out
                                     </a>
                                 </SignOutButton>
-                            ) : (
+                            </li>
+                        ) : (
+                            <li>
                                 <SignInButton>
                                     <a
                                         className="underline hover:text-gray-400 block px-4 py-2 cursor-pointer text-green-500"
@@ -96,8 +120,8 @@ export default function Navbar() {
                                         Sign In
                                     </a>
                                 </SignInButton>
-                            )}
-                        </li>
+                            </li>
+                        )}
                     </ul>
                 </div>
             </div>
