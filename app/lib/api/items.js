@@ -10,8 +10,8 @@ export const getItems = async ({ userId, token }) => {
     return items
 }
 
-export const getAllItems = async ({ token }) => {
-    const supabase = await supabaseClient(token)
+export const getAllItems = async () => {
+    const supabase = await supabaseClient()
     const { data: items, error } = await supabase
         .from('items')
         .select('*')
