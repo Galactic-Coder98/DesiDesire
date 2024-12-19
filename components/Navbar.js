@@ -86,6 +86,16 @@ export default function Navbar() {
                                 About
                             </a>
                         </li>
+                        {isSignedIn && (
+                            <li>
+                                <a
+                                    href="/add-item"
+                                    className="underline hover:text-gray-400 block px-4 py-2"
+                                >
+                                    Add Item
+                                </a>
+                            </li>
+                        )}
                         {isSignedIn ? (
                             <li className="flex items-center space-x-4">
                                 <UserButton afterSignOutUrl="/" />
@@ -128,6 +138,16 @@ export default function Navbar() {
                             About
                         </a>
                     </li>
+                    {isSignedIn && (
+                        <li>
+                            <a
+                                href="/add-item"
+                                className="underline hover:text-gray-400 block px-4 py-2"
+                            >
+                                Add Item
+                            </a>
+                        </li>
+                    )}
                     {isSignedIn ? (
                         <li className="flex flex-col items-center space-y-2 text-center">
                             <UserButton afterSignOutUrl="/" />
