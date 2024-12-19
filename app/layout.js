@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
           <Navbar />
           
           {/* Main content */}
-          <main className="flex-grow max-w-screen-xl mx-auto">
+          <main className="flex-grow max-w-screen-xl mx-auto flex items-center justify-center">
             {children}
           </main>
           

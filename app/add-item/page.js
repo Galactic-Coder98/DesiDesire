@@ -44,7 +44,7 @@ const AddItem = () => {
   };
 
   return (
-    <div className="mx-auto p-6">
+    <div className="mx-auto p-6 border-2 border-white-300 rounded-lg">
       <h1 className="text-2xl font-bold mb-4 text-center">Add a New Item</h1>
 
       {error && <div className="text-red-500 mb-4">{error}</div>}

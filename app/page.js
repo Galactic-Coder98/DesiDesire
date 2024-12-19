@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <div>
       <main className="flex-grow max-w-screen-xl mx-auto">
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-48 p-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-18 p-6">
           {items?.map((info) => (
             <Card cardInfo={info} key={info.id} />
           ))}
