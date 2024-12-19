@@ -56,7 +56,6 @@ const mockData = [
 export default function Home() {
     return(
     <div className = "flex flex-col min-h-screen" >
-      <Navbar />
       <main className="flex-grow max-w-screen-xl mx-auto">
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 p-6">
           {mockData.map((info) => (
@@ -64,7 +63,6 @@ export default function Home() {
           ))}
         </div>
       </main>
-      <Footer />
     </div >
   );
 }
