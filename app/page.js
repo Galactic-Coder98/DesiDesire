@@ -21,9 +21,9 @@ export default function Home() {
   }, [userId, getToken])
 
   return (
-    <div className="flex flex-col min-h-screen" >
+    <div>
       <main className="flex-grow max-w-screen-xl mx-auto">
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 p-6 border-2 border-yellow-300">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 p-6">
           {items?.map((info) => (
             <Card cardInfo={info} key={info.id} />
           ))}
