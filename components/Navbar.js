@@ -1,10 +1,10 @@
 "use client";
 import { useState } from "react";
-import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
+import { SignInButton, SignOutButton, UserButton, useUser } from "@clerk/nextjs";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
-    const { isSignedIn, user } = useUser();
+    const { isSignedIn } = useUser();
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -88,31 +88,7 @@ export default function Navbar() {
                         </li>
                         {isSignedIn ? (
                             <li className="flex items-center space-x-4">
-                                <a href="/account" className="relative">
-                                    {user?.profileImageUrl ? (
-                                        <img
-                                            src={user.profileImageUrl}
-                                            alt="User Avatar"
-                                            className="w-8 h-8 rounded-full border border-gray-300 shadow-sm"
-                                        />
-                                    ) : (
-                                        <div
-                                            className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-300 text-black font-bold text-sm border border-gray-300 shadow-sm"
-                                            title={user?.fullName || "User"}
-                                        >
-                                            {user?.fullName
-                                                ?.split(" ")
-                                                .map((part) => part.charAt(0).toUpperCase())
-                                                .join("")
-                                                .slice(0, 2)}
-                                        </div>
-                                    )}
-                                </a>
-                                <SignOutButton>
-                                    <a className="underline text-red-500 hover:text-red-700 block px-4 py-2 cursor-pointer">
-                                        Sign Out
-                                    </a>
-                                </SignOutButton>
+                                <UserButton afterSignOutUrl="/" />
                             </li>
                         ) : (
                             <li>
@@ -154,31 +130,7 @@ export default function Navbar() {
                     </li>
                     {isSignedIn ? (
                         <li className="flex flex-col items-center space-y-2 text-center">
-                            <a href="/account" className="relative">
-                                {user?.profileImageUrl ? (
-                                    <img
-                                        src={user.profileImageUrl}
-                                        alt="User Avatar"
-                                        className="w-8 h-8 rounded-full border border-gray-300 shadow-sm"
-                                    />
-                                ) : (
-                                    <div
-                                        className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-300 text-black font-bold text-sm border border-gray-300 shadow-sm"
-                                        title={user?.fullName || "User"}
-                                    >
-                                        {user?.fullName
-                                            ?.split(" ")
-                                            .map((part) => part.charAt(0).toUpperCase())
-                                            .join("")
-                                            .slice(0, 2)}
-                                    </div>
-                                )}
-                            </a>
-                            <SignOutButton>
-                                <a className="underline text-red-500 hover:text-red-700 block px-4 py-2 cursor-pointer">
-                                    Sign Out
-                                </a>
-                            </SignOutButton>
+                            <UserButton afterSignOutUrl="/" />
                         </li>
                     ) : (
                         <li>
