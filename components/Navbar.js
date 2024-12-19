@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { SignInButton, SignOutButton, UserButton, useUser } from "@clerk/nextjs";
+import Link from "next/link";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -14,6 +15,7 @@ export default function Navbar() {
         <nav className="bg-white shadow-md sticky top-0 z-50 rounded-lg w-full px-4 mx-auto mt-2 max-w-screen-xl">
             <div className="flex justify-between items-center h-16">
                 {/* Logo Section */}
+                <Link href="/" className="flex items-center space-x-2">
                 <div className="flex items-center space-x-2">
                     <div className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-200 p-2">
                         <img
@@ -26,6 +28,7 @@ export default function Navbar() {
                         DesiDesire
                     </span>
                 </div>
+                </Link>
 
                 {/* Hamburger Menu Button */}
                 <div className="md:hidden">
