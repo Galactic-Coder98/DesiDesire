@@ -2,24 +2,25 @@ import { supabaseClient } from "../supabaseClient";
 
 export const getItems = async ({ userId, token }) => {
     const supabase = await supabaseClient(token)
-    const { data: favorites, error } = await supabase
+    const { data: items, error } = await supabase
         .from('items')
         .select('*')
         .eq('user_id', userId)
     if (error) console.log(error)
-
-    return favorites
+    return items
 }
 
-export const addItem = async ({ userId, token, name, price }) => {
+export const addItem = async ({ userId, token, name, price , seller}) => {
     const supabase = await supabaseClient(token)
+    console.log(userId)
     const { data, error } = await supabase
         .from('items')
         .insert({
             'user_id': userId,
             'name': name,
-            'price': price
-            // 'image_url': imageUrl
+            'price': price,
+            'seller': seller,
+            'image_url': 'https://via.placeholder.com/150'
         })
     if (error) console.log(error)
 }

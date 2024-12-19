@@ -1,7 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useUser } from '@clerk/nextjs';  // Ensure user is signed in
+import { useAuth, useUser } from '@clerk/nextjs';  // Ensure user is signed in
+import { addItem, getItems } from '../lib/api/items';
+import { redirect } from 'next/navigation';
 
 const AddItem = () => {
   const { user, isSignedIn } = useUser(); // Fetch user info from Clerk
@@ -11,6 +13,7 @@ const AddItem = () => {
     seller: '',  // This will be automatically set based on the signed-in user
   });
   const [error, setError] = useState('');
+  const { userId, getToken } = useAuth();
 
   // Set the seller name once user info is available
   useEffect(() => {
@@ -31,26 +34,13 @@ const AddItem = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!isSignedIn) {
-      setError('You must be signed in to add an item.');
-      return;
-    }
-
-    const res = await fetch('/api/items', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(itemData),
-    });
-
-    if (res.ok) {
-      alert('Item added successfully!');
-      setItemData({ name: '', price: '', seller: '' });
-    } else {
-      setError('There was an error adding the item.');
-    }
+    let name = e.target.name.value
+    let price = e.target.price.value
+    let seller =itemData.seller
+    // Add to items in database
+    const token = await getToken({ template: "supabase" });
+    const newFavorite = await addItem({ userId, token, name, price, seller });
+    redirect('/')
   };
 
   return (
@@ -70,7 +60,7 @@ const AddItem = () => {
             id="name"
             value={itemData.name}
             onChange={handleChange}
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+            className="mt-1 p-2 border border-gray-300 text-black rounded-md w-full"
             required
           />
         </div>
@@ -101,7 +91,7 @@ const AddItem = () => {
             id="price"
             value={itemData.price}
             onChange={handleChange}
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+            className="mt-1 p-2 border border-gray-300 text-black rounded-md w-full"
             required
           />
         </div>

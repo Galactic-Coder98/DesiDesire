@@ -1,65 +1,31 @@
-import Card from "@/components/Card";
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
+'use client'
 
-const mockData = [
-  {
-    id: 1,
-    name: "Embroidered Sherwani",
-    seller: "Elegant Attire",
-    price: 120,
-    imageUrl: "https://via.placeholder.com/150",
-    quantity: 10
-  },
-  {
-    id: 2,
-    name: "Silk Saree",
-    seller: "Heritage Threads",
-    price: 90,
-    imageUrl: "https://via.placeholder.com/150",
-    quantity: 25
-  },
-  {
-    id: 3,
-    name: "Casual Kurta Set",
-    seller: "Daily Wear",
-    price: 45,
-    imageUrl: "https://via.placeholder.com/150",
-    quantity: 50
-  },
-  {
-    id: 4,
-    name: "Anarkali Suit",
-    seller: "Regal Designs",
-    price: 110,
-    imageUrl: "https://via.placeholder.com/150",
-    quantity: 15
-  },
-  {
-    id: 5,
-    name: "Lehenga Choli",
-    seller: "Festive Fashions",
-    price: 150,
-    imageUrl: "https://via.placeholder.com/150",
-    quantity: 8
-  },
-  {
-    id: 6,
-    name: "Men's Pathani Suit",
-    seller: "Classic Menswear",
-    price: 70,
-    imageUrl: "https://via.placeholder.com/150",
-    quantity: 30
-  }
-];
+import Card from "@/components/Card";
+import { useEffect, useState } from "react";
+import { getItems } from "./lib/api/items";
+import { useAuth } from "@clerk/nextjs";
 
 export default function Home() {
-    return(
-    <div className = "flex flex-col min-h-screen" >
+  const [items, setItems] = useState([])
+  const { userId, getToken } = useAuth();
+
+  useEffect(() => {
+    if (!userId) return
+    async function load() {
+
+      const token = await getToken({ template: "supabase" });
+      const items = await getItems({ userId, token })
+      setItems(items)
+    }
+    load()
+  }, [userId, getToken])
+
+  return (
+    <div className="flex flex-col min-h-screen" >
       <main className="flex-grow max-w-screen-xl mx-auto">
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 p-6">
-          {mockData.map((info) => (
-            <Card cardInfo={info} key={info.id}/>
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 p-6 border-2 border-yellow-300">
+          {items?.map((info) => (
+            <Card cardInfo={info} key={info.id} />
           ))}
         </div>
       </main>
