@@ -2,7 +2,7 @@
 
 import Card from "@/components/Card";
 import { useEffect, useState } from "react";
-import { getItems } from "./lib/api/items";
+import { getAllItems } from "./lib/api/items";
 import { useAuth } from "@clerk/nextjs";
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
     async function load() {
 
       const token = await getToken({ template: "supabase" });
-      const items = await getItems({ userId, token })
+      const items = await getAllItems({  token })
       setItems(items)
     }
     load()

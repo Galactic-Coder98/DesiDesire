@@ -10,6 +10,15 @@ export const getItems = async ({ userId, token }) => {
     return items
 }
 
+export const getAllItems = async ({ token }) => {
+    const supabase = await supabaseClient(token)
+    const { data: items, error } = await supabase
+        .from('items')
+        .select('*')
+    if (error) console.log(error)
+    return items
+}
+
 export const addItem = async ({ userId, token, name, price , seller}) => {
     const supabase = await supabaseClient(token)
     console.log(userId)
