@@ -8,8 +8,8 @@ export default function Card({ cardInfo }) {
                     <Image
                         src={cardInfo.imageUrl}
                         alt={cardInfo.name}
-                        layout="fill"
-                        objectFit="cover"
+                        fill
+                        style={{ objectFit: "cover" }}
                         className="rounded-t-md"
                     />
                 </div>
