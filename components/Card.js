@@ -2,11 +2,11 @@ import Image from "next/image";
 
 export default function Card({ cardInfo }) {
     return (
-        <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+        <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-glow transition-shadow">
             <div className="h-40 bg-gray-200 flex items-center justify-center">
                 <div className="w-full h-40 relative">
                     <Image
-                        src={cardInfo.imageUrl} // Fallback image
+                        src={cardInfo.imageUrl}
                         alt={cardInfo.name}
                         layout="fill"
                         objectFit="cover"
@@ -23,5 +23,5 @@ export default function Card({ cardInfo }) {
                 </button>
             </div>
         </div>
-    )
+    );
 }
