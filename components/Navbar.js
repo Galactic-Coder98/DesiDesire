@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { SignInButton, SignOutButton, UserButton, useUser } from "@clerk/nextjs";
+import { SignInButton, SignOutButton, SignUpButton, UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 
 export default function Navbar() {
@@ -16,18 +16,18 @@ export default function Navbar() {
             <div className="flex justify-between items-center h-16">
                 {/* Logo Section */}
                 <Link href="/" className="flex items-center space-x-2">
-                <div className="flex items-center space-x-2">
-                    <div className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-200 p-2">
-                        <img
-                            src="/sari-svg.svg" // Path to your SVG in the public folder
-                            alt="DesiDesire Logo"
-                            className="w-full h-full"
-                        />
+                    <div className="flex items-center space-x-2">
+                        <div className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-200 p-2">
+                            <img
+                                src="/sari-svg.svg" // Path to your SVG in the public folder
+                                alt="DesiDesire Logo"
+                                className="w-full h-full"
+                            />
+                        </div>
+                        <span className="italic text-black text-xl font-semibold font-sans">
+                            DesiDesire
+                        </span>
                     </div>
-                    <span className="italic text-black text-xl font-semibold font-sans">
-                        DesiDesire
-                    </span>
-                </div>
                 </Link>
 
                 {/* Hamburger Menu Button */}
@@ -104,7 +104,7 @@ export default function Navbar() {
                                 <UserButton afterSignOutUrl="/" />
                             </li>
                         ) : (
-                            <li>
+                            <li className="flex items-center space-x-4">
                                 <SignInButton>
                                     <a
                                         className="underline hover:text-gray-400 block px-4 py-2 cursor-pointer text-green-500"
@@ -112,6 +112,13 @@ export default function Navbar() {
                                         Sign In
                                     </a>
                                 </SignInButton>
+                                <SignUpButton>
+                                    <a
+                                        className="underline hover:text-gray-400 block px-4 py-2 cursor-pointer text-blue-500"
+                                    >
+                                        Sign Up
+                                    </a>
+                                </SignUpButton>
                             </li>
                         )}
                     </ul>
@@ -156,7 +163,7 @@ export default function Navbar() {
                             <UserButton afterSignOutUrl="/" />
                         </li>
                     ) : (
-                        <li>
+                        <li className="flex flex-col items-center space-y-2 text-center">
                             <SignInButton>
                                 <a
                                     className="underline hover:text-gray-400 block px-4 py-2 cursor-pointer text-green-500"
@@ -164,6 +171,13 @@ export default function Navbar() {
                                     Sign In
                                 </a>
                             </SignInButton>
+                            <SignUpButton>
+                                <a
+                                    className="underline hover:text-gray-400 block px-4 py-2 cursor-pointer text-blue-500"
+                                >
+                                    Sign Up
+                                </a>
+                            </SignUpButton>
                         </li>
                     )}
                 </ul>
