@@ -19,9 +19,9 @@ export const getAllItems = async () => {
     return items
 }
 
-export const addItem = async ({ userId, token, name, price , seller}) => {
+export const addItem = async ({ userId, token, name, price , seller, image_url }) => {
     const supabase = await supabaseClient(token)
-    console.log(userId)
+
     const { data, error } = await supabase
         .from('items')
         .insert({
@@ -29,8 +29,8 @@ export const addItem = async ({ userId, token, name, price , seller}) => {
             'name': name,
             'price': price,
             'seller': seller,
-            'image_url': 'https://via.placeholder.com/150'
-        })
+            'image_url': image_url || 'https://via.placeholder.com/150'
+        });
     if (error) console.log(error)
 }
 

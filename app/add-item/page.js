@@ -4,23 +4,25 @@ import { useState, useEffect } from 'react';
 import { useAuth, useUser } from '@clerk/nextjs';  // Ensure user is signed in
 import { addItem, getItems } from '../lib/api/items';
 import { redirect } from 'next/navigation';
+import { supabaseClient } from '../lib/supabaseClient';
 
 const AddItem = () => {
-  const { user, isSignedIn } = useUser(); // Fetch user info from Clerk
+  const { user, isSignedIn } = useUser();
   const [itemData, setItemData] = useState({
     name: '',
     price: '',
-    seller: '',  // This will be automatically set based on the signed-in user
+    seller: '',
+    image_url: null
   });
   const [error, setError] = useState('');
   const { userId, getToken } = useAuth();
+  const [image, setImage] = useState(null);
 
-  // Set the seller name once user info is available
   useEffect(() => {
     if (isSignedIn && user) {
       setItemData((prevState) => ({
         ...prevState,
-        seller: user.fullName || user.username || 'Unknown Seller',  // You can choose what to use from the user object
+        seller: user.fullName || user.username || 'Unknown Seller',
       }));
     }
   }, [isSignedIn, user]);
@@ -32,16 +34,60 @@ const AddItem = () => {
     });
   };
 
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let name = e.target.name.value
-    let price = e.target.price.value
-    let seller =itemData.seller
-    // Add to items in database
+    let name = e.target.name.value;
+    let price = e.target.price.value;
+    let seller = itemData.seller;
+
+    if (!name || price <= 0 || !seller) {
+      setError('Please fill out all fields correctly.');
+      return;
+    }
+
+    let imageUrl = itemData.image_url;
+
+    if (image) {
+      try {
+        imageUrl = await uploadImageToStorage(image);
+      } catch (err) {
+        setError('Error uploading image');
+        return;
+      }
+    }
+
     const token = await getToken({ template: "supabase" });
-    const newFavorite = await addItem({ userId, token, name, price, seller });
-    redirect('/')
+    const newFavorite = await addItem({ userId, token, name, price, seller, image_url: imageUrl });
+
+    redirect('/');
   };
+
+  const uploadImageToStorage = async (file) => {
+    const token = await getToken({ template: "supabase" });
+    const supabase = await supabaseClient(token);
+  
+    const fileName = `${Date.now()}-${file.name}`;
+    const filePath = `images/${fileName}`;
+  
+    const { data, error } = await supabase.storage.from('item-images').upload(filePath, file);
+  
+    if (error) {
+      console.log('Upload error:', error);
+      throw new Error('Error uploading image');
+    }
+  
+    const { data: publicUrlData, error: urlError } = supabase.storage.from('item-images').getPublicUrl(filePath);
+
+    if (urlError) {
+      throw new Error('Error fetching image URL');
+    }
+  
+    return publicUrlData.publicUrl;
+  };  
 
   return (
     <div className="mx-auto p-6 border-2 border-white-300 rounded-lg">
@@ -50,6 +96,20 @@ const AddItem = () => {
       {error && <div className="text-red-500 mb-4">{error}</div>}
 
       <form onSubmit={handleSubmit} className="max-w-lg mx-auto space-y-4">
+        {/* Image Upload */}
+        <div>
+          <label htmlFor="image" className="block font-medium">
+            Item Image
+          </label>
+          <input
+            type="file"
+            name="image"
+            id="image"
+            onChange={handleImageChange}
+            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+          />
+        </div>
+
         <div>
           <label htmlFor="name" className="block font-medium">
             Item Name
