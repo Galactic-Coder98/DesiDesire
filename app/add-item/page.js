@@ -50,25 +50,25 @@ const AddItem = () => {
     }
 
     let imageUrl = itemData.image_url;
+    const token = await getToken({ template: "supabase" });
 
     if (image) {
       try {
-        imageUrl = await uploadImageToStorage(image);
+        imageUrl = await uploadImageToStorage(image, token);
       } catch (err) {
         setError('Error uploading image');
         return;
       }
     }
 
-    const token = await getToken({ template: "supabase" });
     const newFavorite = await addItem({ userId, token, name, price, seller, image_url: imageUrl });
 
     redirect('/');
   };
 
-  const uploadImageToStorage = async (file) => {
-    const token = await getToken({ template: "supabase" });
-    const supabase = await supabaseClient(token);
+  const uploadImageToStorage = async (file, token) => {
+    const sameToken = token;
+    const supabase = await supabaseClient(sameToken);
   
     const fileName = `${Date.now()}-${file.name}`;
     const filePath = `images/${fileName}`;
