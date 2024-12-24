@@ -6,7 +6,7 @@ export default function AboutPage() {
     <div className="h-[100%] flex flex-col items-center justify-center gap-10">
       <p className={`${title()} text-md !text-md`}>Sign In or Sign Up to view items for sale!</p>
       <Carousel />
-      <p>Items at DESIDESIRE are one click away from your door!</p>
+      <p>Items on DESIDESIRE are one click away from your door!</p>
     </div>
   );
 }
