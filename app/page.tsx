@@ -32,7 +32,7 @@ export default function Home() {
                 <CustomCard key={item.id} item={item} />
               ))
             ) : (
-              <p>No items available</p>
+              <p className="text-bold">No items available</p>
         )}
       </div>
     </section>
