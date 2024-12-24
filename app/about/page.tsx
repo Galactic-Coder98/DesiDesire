@@ -4,9 +4,9 @@ import { title } from "@/components/primitives";
 export default function AboutPage() {
   return (
     <div className="h-[100%] flex flex-col items-center justify-center gap-10">
-      <p className={`${title()} text-md !text-md`}>Sign In or Sign Up to view items for sale!</p>
+      <p className={`text-xl font-bold`}>Sign In or Sign Up to view items for sale!</p>
       <Carousel />
-      <p>Items on DESIDESIRE are one click away from your door!</p>
+      <p>1 Click Away From Your Doorstep!</p>
     </div>
   );
 }

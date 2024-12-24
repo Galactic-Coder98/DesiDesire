@@ -1,3 +1,4 @@
+"use client";
 import {
   Navbar as NextUINavbar,
   NavbarContent,
@@ -23,8 +24,15 @@ import {
   SearchIcon,
   Logo,
 } from "@/components/icons";
+import { useState } from "react";
 
 export const Navbar = () => {
+  const [iseMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
+  const handleLinkClick = (): void => {
+    setIsMenuOpen(false);
+  }
+
   return (
     <NextUINavbar maxWidth="xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -121,6 +129,7 @@ export const Navbar = () => {
                 )}
                 color="foreground"
                 href="/"
+                onClick={handleLinkClick}
               >
                 Home
             </NextLink>
@@ -134,6 +143,7 @@ export const Navbar = () => {
                 )}
                 color="foreground"
                 href="/about"
+                onClick={handleLinkClick}
               >
                 About
             </NextLink>
@@ -164,6 +174,7 @@ export const Navbar = () => {
                   )}
                   color="foreground"
                   href="/about"
+                  onClick={handleLinkClick}
                 >
                   My Items
               </NextLink>
