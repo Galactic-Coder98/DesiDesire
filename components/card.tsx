@@ -22,8 +22,7 @@ export default function CustomCard({ item }: { item: Item }): JSX.Element {
         <Image
           alt="Card background"
           className="object-cover rounded-xl"
-          src="https://nextui.org/images/hero-card-complete.jpeg"
-          //src={item.image_url}
+          src={item.image_url}
           width={270}
         />
       </CardBody>
