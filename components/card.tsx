@@ -1,4 +1,5 @@
 "use client";
+import { SignedIn } from "@clerk/nextjs";
 import {Card, CardHeader, CardBody, Image, Button, CardFooter} from "@nextui-org/react";
 
 export interface Item {
@@ -26,16 +27,18 @@ export default function CustomCard({ item }: { item: Item }): JSX.Element {
           width={270}
         />
       </CardBody>
-      <CardFooter className="">
-        <Button 
-          className="text-tiny text-white bg-blue-500"
-          size="sm"
-          radius="lg"
-          variant="flat"
-        >
-          Buy
-        </Button>
-      </CardFooter>
+      <SignedIn>
+        <CardFooter className="">
+          <Button 
+            className="text-tiny text-white bg-blue-500"
+            size="sm"
+            radius="lg"
+            variant="flat"
+          >
+            Buy
+          </Button>
+        </CardFooter>
+      </SignedIn>
     </Card>
   );
 }
