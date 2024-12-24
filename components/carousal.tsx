@@ -5,10 +5,9 @@ import styles from "../styles/carousal.module.css";
 import { Item } from "./card";
 
 const items: Item[] = [
-  { id: 1, name: "Item 1", price: 100, seller: "Seller A", image_url: "https://nextui.org/images/hero-card-complete.jpeg" },
-  { id: 2, name: "Item 2", price: 200, seller: "Seller B", image_url: "https://nextui.org/images/hero-card-complete.jpeg" },
-  { id: 3, name: "Item 3", price: 300, seller: "Seller C", image_url: "https://nextui.org/images/hero-card-complete.jpeg" },
-  { id: 4, name: "Item 4", price: 400, seller: "Seller D", image_url: "https://nextui.org/images/hero-card-complete.jpeg" },
+  { id: 1, name: "Purple Velor Leghna’s", price: 649, seller: "Venus’ Vision", image_url: "https://mewinurmthovscbqwbbt.supabase.co/storage/v1/object/public/item-images/images/PurpleVelor.png" },
+  { id: 2, name: "Rosè Red Sari’s 4 Rani’s", price: 899, seller: "Rani ka Sari’s", image_url: "https://mewinurmthovscbqwbbt.supabase.co/storage/v1/object/public/item-images/images/RedSari.png" },
+  { id: 3, name: "Princess Pink Salwars", price: 1249, seller: "Gulabi Galore", image_url: "https://mewinurmthovscbqwbbt.supabase.co/storage/v1/object/public/item-images/images/GulabiPic.png" },
 ];
 
 export default function Carousel(): JSX.Element {
