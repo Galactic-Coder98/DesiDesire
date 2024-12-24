@@ -11,7 +11,7 @@ import { link as linkStyles } from "@nextui-org/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
 
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { SignInButton, SignedIn, SignedOut, UserButton, SignUpButton } from "@clerk/nextjs";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
@@ -66,26 +66,41 @@ export const Navbar = () => {
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end"
       >
-        <NavbarItem>
-          <SignedOut>
+        <SignedOut>
+          <NavbarItem className={clsx(
+                  linkStyles({ color: "foreground" }),
+                  "data-[active=true]:text-primary data-[active=true]:font-medium",
+                )}>
             <SignInButton />
-          </SignedOut>
-          <SignedIn>
+          </NavbarItem>
+
+          <NavbarItem className={clsx(
+                  linkStyles({ color: "foreground" }),
+                  "data-[active=true]:text-primary data-[active=true]:font-medium",
+                )}>
+            <SignUpButton />
+          </NavbarItem>
+        </SignedOut>
+
+        <SignedIn>
+          <NavbarItem>
             <UserButton />
-          </SignedIn>
-        </NavbarItem>
+          </NavbarItem>
+        </SignedIn>
         <NavbarItem className="hidden sm:flex gap-2">
           <ThemeSwitch />
         </NavbarItem>
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-        <ThemeSwitch />
         <NavbarMenuToggle />
       </NavbarContent>
 
       <NavbarMenu>
         <div className="mt-2 flex flex-col items-center gap-2">
+          <NavbarMenuItem>
+            <ThemeSwitch />
+          </NavbarMenuItem>
           <NavbarMenuItem>
               <NextLink
                 className={clsx(
@@ -112,14 +127,27 @@ export const Navbar = () => {
             </NextLink>
           </NavbarMenuItem>
 
-          <NavbarMenuItem>
-            <SignedOut>
+          <SignedOut>
+            <NavbarMenuItem className={clsx(
+                  linkStyles({ color: "foreground" }),
+                  "data-[active=true]:text-primary data-[active=true]:font-medium",
+                )}>
               <SignInButton />
-            </SignedOut>
-            <SignedIn>
+            </NavbarMenuItem>
+
+            <NavbarMenuItem className={clsx(
+                  linkStyles({ color: "foreground" }),
+                  "data-[active=true]:text-primary data-[active=true]:font-medium",
+                )}>
+              <SignUpButton />
+            </NavbarMenuItem>
+          </SignedOut>
+
+          <SignedIn>
+            <NavbarMenuItem>
               <UserButton />
-            </SignedIn>
-          </NavbarMenuItem>
+            </NavbarMenuItem>
+          </SignedIn>
         </div>
       </NavbarMenu>
     </NextUINavbar>
