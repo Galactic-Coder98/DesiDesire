@@ -1,55 +1,42 @@
-import { Link } from "@nextui-org/link";
-import { Snippet } from "@nextui-org/snippet";
-import { Code } from "@nextui-org/code";
-import { button as buttonStyles } from "@nextui-org/theme";
-
-import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
+"use client";
+import { getAllItems, Item } from "./lib/api/items";
+import CustomCard from "@/components/card";
+import { useEffect, useState } from "react";
+import { SignedIn, SignedOut, useUser } from "@clerk/nextjs";
 
 export default function Home() {
+  const [items, setItems] = useState<Item[] | null>(null);
+  const { isSignedIn } = useUser();
+
+  async function load() {
+    try {
+      const fetchedItems = await getAllItems();
+      setItems(fetchedItems);
+    } catch (error) {
+      console.error("Failed to load items: ", error);
+    }
+  };
+
+  useEffect(() => {
+    load();
+  }, []);
+
   return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <div className="inline-block max-w-xl text-center justify-center">
-        <span className={title()}>Make&nbsp;</span>
-        <span className={title({ color: "violet" })}>beautiful&nbsp;</span>
-        <br />
-        <span className={title()}>
-          websites regardless of your design experience.
-        </span>
-        <div className={subtitle({ class: "mt-4" })}>
-          Beautiful, fast and modern React UI library.
-        </div>
-      </div>
-
-      <div className="flex gap-3">
-        <Link
-          isExternal
-          className={buttonStyles({
-            color: "primary",
-            radius: "full",
-            variant: "shadow",
-          })}
-          href={siteConfig.links.docs}
-        >
-          Documentation
-        </Link>
-        <Link
-          isExternal
-          className={buttonStyles({ variant: "bordered", radius: "full" })}
-          href={siteConfig.links.github}
-        >
-          <GithubIcon size={20} />
-          GitHub
-        </Link>
-      </div>
-
-      <div className="mt-8">
-        <Snippet hideCopyButton hideSymbol variant="bordered">
-          <span>
-            Get started by editing <Code color="primary">app/page.tsx</Code>
-          </span>
-        </Snippet>
+    <section className="flex-grow max-w-screen-xl mx-auto mb-4 mt-4">
+      
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-18">
+        <SignedIn>
+          {items && items.length > 0 ? (
+            items.map((item) => (
+              <CustomCard key={item.id} item={item} />
+            ))
+          ) : (
+            <p>No items available</p>
+          )}
+        </SignedIn>
+        <SignedOut>
+          <p>Please sign in...</p>
+        </SignedOut>
       </div>
     </section>
   );

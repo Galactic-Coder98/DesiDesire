@@ -1,0 +1,26 @@
+.carousel {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.track {
+    display: flex;
+    width: calc(200%);
+    animation: scroll 15s linear infinite;
+}
+
+.card {
+    flex: 0 0 auto;
+    margin-right: 16px;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+  
