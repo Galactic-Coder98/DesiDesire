@@ -23,10 +23,10 @@ export default function Home() {
   }, []);
 
   return (
-    <section className="h-full flex-grow max-w-screen-xl mx-auto mb-4 mt-4">
+    <section className="h-full flex-grow max-w-screen-xl mx-auto">
       <SignedOut>
         <div className="h-full flex flex-col items-center justify-center gap-10">
-          <p className="font-bold text-xl">Sign In or Sign Up to view items for sale!</p>
+          <p className="font-bold text-xl text-center">Sign In or Sign Up to view items for sale!</p>
           <Carousel />
           <p>1 Click Away From Your Doorstep!</p>
         </div>
