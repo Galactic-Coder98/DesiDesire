@@ -84,6 +84,18 @@ export const Navbar = () => {
 
         <SignedIn>
           <NavbarItem>
+            <NextLink
+                  className={clsx(
+                    linkStyles({ color: "foreground" }),
+                    "data-[active=true]:text-primary data-[active=true]:font-medium",
+                  )}
+                  color="foreground"
+                  href="/about"
+                >
+                  My Items
+              </NextLink>
+          </NavbarItem>
+          <NavbarItem className="flex">
             <UserButton />
           </NavbarItem>
         </SignedIn>
@@ -144,6 +156,18 @@ export const Navbar = () => {
           </SignedOut>
 
           <SignedIn>
+            <NavbarMenuItem>
+              <NextLink
+                  className={clsx(
+                    linkStyles({ color: "foreground" }),
+                    "data-[active=true]:text-primary data-[active=true]:font-medium",
+                  )}
+                  color="foreground"
+                  href="/about"
+                >
+                  My Items
+              </NextLink>
+            </NavbarMenuItem>
             <NavbarMenuItem>
               <UserButton />
             </NavbarMenuItem>

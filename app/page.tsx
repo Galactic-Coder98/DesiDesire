@@ -23,20 +23,17 @@ export default function Home() {
 
   return (
     <section className="flex-grow max-w-screen-xl mx-auto mb-4 mt-4">
-      
+      <SignedOut>
+        <p className="text-center mb-4 font-bold text-md">Sign in or Sign up to view and buy items!</p>
+      </SignedOut>
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-18">
-        <SignedIn>
-          {items && items.length > 0 ? (
-            items.map((item) => (
-              <CustomCard key={item.id} item={item} />
-            ))
-          ) : (
-            <p>No items available</p>
-          )}
-        </SignedIn>
-        <SignedOut>
-          <p>Please sign in...</p>
-        </SignedOut>
+        {items && items.length > 0 ? (
+              items.map((item) => (
+                <CustomCard key={item.id} item={item} />
+              ))
+            ) : (
+              <p>No items available</p>
+        )}
       </div>
     </section>
   );
