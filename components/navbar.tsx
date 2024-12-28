@@ -90,9 +90,9 @@ export default function Navbar() {
             <UserButton />
           </SignedIn>
         </NavbarItem>
-        <NavbarItem className="lg:hidden">
-          <NavbarMenuToggle />
-        </NavbarItem>
+        {/* <NavbarItem > */}
+          <NavbarMenuToggle className="lg:hidden" />
+        {/* </NavbarItem> */}
       </NavbarContent>
 
       {/* Mobile menu links */}
