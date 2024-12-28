@@ -22,3 +22,15 @@ export const getAllItems = async (): Promise<Item[] | null> => {
   
     return items;
 };
+
+export const getItems = async ({ userId, token } 
+    : { userId: string, token: string }): 
+    Promise<Item[] | null> => {
+    const supabase = await supabaseClient(token)
+    const { data: items, error } = await supabase
+        .from('items')
+        .select('*')
+        .eq('user_id', userId)
+    if (error) console.log(error)
+    return items
+}
