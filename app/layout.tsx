@@ -7,7 +7,8 @@ import { Providers } from "./providers";
 
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
-import { Navbar } from "@/components/navbar";
+import Navbar from "../components/navbar";
+import Footer from '../components/footer'
 import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   icons: {
-    icon: "/sari-logo.png",
+    icon: "/logo.png",
   },
 };
 
@@ -44,25 +45,16 @@ export default function RootLayout({
           )}
         >
           <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-            <div className="relative flex flex-col h-screen">
+            <div className="flex relative flex-col h-screen">
               <Navbar />
-              <main className="container mx-auto max-w-7xl px-6 flex-grow">
+              <main className="container flex-grow px-6 mx-auto max-w-7xl">
                 {children}
               </main>
-              <footer className="w-full flex items-center justify-center py-6">
-                <Link
-                  className="flex items-center gap-1 text-current"
-                  href="/"
-                  title="DESIDESIRE Homepage"
-                >
-                  <span className="text-default-600">&copy; {new Date().getFullYear()}</span>
-                  <p className="text-primary italic">DESIDESIRE. All rights reserved.</p>
-                </Link>
-              </footer>
+              <Footer />
             </div>
           </Providers>
         </body>
-    </html>
+      </html>
     </ClerkProvider>
   );
 }
