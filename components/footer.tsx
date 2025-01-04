@@ -12,11 +12,5 @@ export default function Footer() {
                 <p className="italic text-primary">DESIDESIRE. All rights reserved.</p>
             </Link>
         </footer>
-        //     <footer className="flex justify-center items-center py-6 w-full">
-        //     <span className="text-default-600">&copy; {new Date().getFullYear()}
-        //         <span className="text-primary"> DesiDesire </span>
-
-        //         All rights reserved.</span>
-        // </footer>
     )
 }
